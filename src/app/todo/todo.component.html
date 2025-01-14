@@ -1,0 +1,58 @@
+<div class="todo-app">
+    <h1>To do List Management</h1>
+</div>
+  
+<div class="filters">
+    <label for="filterDate">Date:</label>
+    <input type="date" id="filterDate" [(ngModel)]="filterDate"/>
+
+    <label for="filterStatus">Filter by Status:</label>
+  <select id="filterStatus" [(ngModel)]="filterStatus">
+    <option value="All">All</option>
+    <option value="To Do">To Do</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Done">Done</option>
+  </select>
+
+
+    <label for="search">Search:</label>
+    <input type="text" id="search" [(ngModel)]="searchTerm" placeholder="Search" />
+
+
+    <button (click)="filterTodos()">Apply Filters</button>
+    <button (click)="clearFilters()">Clear Filters</button>
+
+</div>
+
+
+<form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
+    <input type="text" formControlName="title" placeholder="Title">
+    <select formControlName="status">
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In progress</option>
+            <option value="Done">Done</option>
+        </select>
+        <input type="date" formControlName="date">
+        <textarea formControlName="description" placeholder="Give a detailed description"></textarea>
+        <button type="submit"> Add</button>
+
+</form>
+
+<ul>
+    @for (todo of todos; track $index) {
+        <li>
+            {{todo.title}}
+            <span class="status">{{todo.status}}</span>
+    @if(todo.date){
+        <span>{{todo.date | date }}</span>
+    }
+
+
+    <button (click)="deleteTodo(todo)">Delete</button>
+        </li>
+    }
+
+    @if(todos.length === 0){
+        <li>There are no todos.</li>
+    }
+</ul>
