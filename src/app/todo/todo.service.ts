@@ -28,7 +28,8 @@ export class TodoService {
   }
 
   addTodo(todo: Todo):Observable<void>{
-    this.todos=[...this.todos, { ...todo, id: Date.now()}];
+    console.log('Todo received by service:', todo); 
+    this.todos = [...this.todos, { ...todo, id: Date.now()}];
     return of(undefined);
   }
 

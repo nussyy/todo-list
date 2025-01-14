@@ -41,11 +41,14 @@
 <ul>
     @for (todo of todos; track $index) {
         <li>
-            {{todo.title}}
-            <span class="status">{{todo.status}}</span>
+            <div>
+                {{todo.title}} - {{todo.status}}
+            </div>
+            
     @if(todo.date){
         <span>{{todo.date | date }}</span>
     }
+     <p>{{todo.description}}</p> 
 
 
     <button (click)="deleteTodo(todo)">Delete</button>

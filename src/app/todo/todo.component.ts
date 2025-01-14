@@ -54,7 +54,11 @@ export class TodoComponent implements OnInit {
   addTodo(){
     if 
     (this.newTodoForm.valid){
-      const newTodo = this.newTodoForm.value as Todo;
+      const newTodo = {
+
+      ... this.newTodoForm.value };
+      console.log('Form data before adding:', newTodo);
+      
       this.todoService.addTodo(newTodo)
       .subscribe(()=>{
         this.fetchTodos();
